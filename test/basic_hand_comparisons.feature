@@ -232,7 +232,7 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
 
 
   # Rule: Straight wins three of a kind, two pairs, pair and high card.
-  #   If both players have two straights, the highest card of the straight is considered.
+  #   If both players have straights, the highest card of the straight is considered.
   #   Ace is treated as 1 or 14, whichever results in a straight.
   #   In a 1-5 straight, ace doesn't count as 14 if comparing highest card.
 
@@ -276,16 +276,404 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     When my opponent plays the hand S10 S9 C11 C12 S8
     Then my hand loses
 
+  Scenario: Both players have a straight, straight with the higher highest card wins
+    Given I play the hand H9 D10 C8 D11 H12
+    When my opponent plays the hand S4 S7 D5 C6 D8
+    Then my hand wins
+
   Scenario: Low straight with an ace wins three of a kind
     Given I play the hand S1 H3 S2 D4 D5
     When my opponent plays the hand C13 D13 H13 H12 H11
     Then my hand wins
 
   Scenario: Three of a kind loses to low straight with an ace
-    Given
+    Given I play the hand D1 S1 H1 H13 D9
+    When my opponent plays the hand C3 C2 C1 H4 H5
+    Then my hand loses
+  
+  Scenario: Low straight with ace loses to higher straight
+    Given I play the hand H2 S1 H3 D4 D5
+    When my opponent plays the hand D9 H7 S8 S10 H11
+    Then my hand loses
+  
+  Scenario: Higher straight wins low straight with aces
+    Given I play the hand S2 D3 H4 D6 S5
+    When my opponent plays the hand H1 H3 S4 C2 S5
+    Then my hand wins
+
+  Scenario: High straight with an ace wins three of a kind
+    Given I play the hand S1 H10 D13 D12 S11
+    When my opponent plays the hand H13 S13 C13 S10 H9
+    Then my hand wins
+
+  Scenario: Three of a kind loses to high straight with an ace
+    Given I play the hand D10 S8 H11 C8 H8
+    When my opponent plays the hand H12 C13 D1 H10 S11
+    Then my hand loses
+
+  Scenario: High straight with an ace wins against lower straight
+    Given I play the hand S11 C10 C12 D13 H1
+    When my opponent plays the hand C13 H12 C11 D10 D9
+    Then my hand wins
+
+  Scenario: Lower straight loses to a high straight with an ace
+    Given I play the hand C4 C5 C6 C7 D8
+    When my opponent plays the hand H11 D12 D13 H10 H1
+    Then my hand loses
 
 
-  # Flush scenarios TBA
-  # Full house scenarios TBA
-  # Four of a kind scenarios TBA
-  # Straight flush scenarios TBA
+  # Rule: Flush wins straight, three of a kind, two pairs, pair and high card.
+  #   If both players have flushes, the hands are compared based on high cards (see high card rules)
+
+  Scenario: Flush wins high card
+    Given I play the hand S3 S8 S4 S11 S13
+    When my opponent plays the hand D8 H1 S9 H2 C12
+    Then my hand wins
+
+  Scenario: High card loses to flush
+    Given I play the hand H10 C11 D12 D13 C5
+    When my opponent plays the hand H9 H3 H11 H8 H5
+    Then my hand loses
+
+  Scenario: Flush wins pair
+    Given I play the hand C10 C11 C4 C9 C2
+    When my opponent plays the hand H1 D9 C9 D11 D7
+    Then my hand wins
+
+  Scenario: Pair loses to flush
+    Given I play the hand H5 C6 D8 C1 S1
+    When my opponent plays the hand S9 S10 S8 S12 S5
+    Then my hand loses
+
+  Scenario: Two pairs loses to flush
+    Given I play the hand C10 H6 S10 C12 D12
+    When my opponent plays the hand S1 S6 S4 S12 S7
+    Then my hand loses
+
+  Scenario: Flush wins two pairs
+    Given I play the hand C2 C3 C11 C9 C5
+    When my opponent plays the hand H11 S8 D8 C4 D11
+    Then my hand wins
+
+  Scenario: Three of a kind loses to flush
+    Given I play the hand D6 H6 C6 S8 H3
+    When my opponent plays the hand D6 D11 D1 D3 D13
+    Then my hand loses
+
+  Scenario: Flush wins three of a kind
+    Given I play the hand C10 C7 C9 C1 C4
+    When my opponent plays the hand C13 S13 H9 H4 D13
+    Then my hand wins
+
+  Scenario: Flush wins straight
+    Given I play the hand D6 D12 D3 D11 D8
+    When my opponent plays the hand H4 D7 S6 H5 C8
+    Then my hand wins
+
+  Scenario: Straight loses to flush
+    Given I play the hand C1 H10 D13 S12 H11
+    When my opponent plays the hand S10 S8 S9 S3 S2
+    Then my hand loses
+
+  Scenario: Both players have a flush, higher high card wins
+    Given I play the hand D8 D9 D4 D10 D11
+    When my opponent plays the hand H7 H5 H3 H2 H10
+    Then my hand wins
+
+  Scenario: Both players have a flush, lower high card loses
+    Given I play the hand C10 C13 C11 C8 C4
+    When my opponent plays the hand S12 S9 S7 S1 S4
+    Then my hand loses
+
+
+  # Rule: Full house wins flush, straight, three of a kind, two pairs, pair and high card
+  #   If both players have three of a kind, the value of the tripled card is compared first and then the pair
+  #   Ace is counted as 14.
+
+  Scenario: Full house wins high card
+    Given I play the hand S10 H7 D7 H10 C10
+    When my opponent plays the hand C1 D10 D5 D4 S9
+    Then my hand wins
+
+  Scenario: High card loses to full house
+    Given I play the hand S10 H8 D5 C12 H3
+    When my opponent plays the hand S11 H11 D11 C13 H13
+    Then my hand loses
+
+  Scenario: Full house wins pair
+    Given I play the hand C3 H8 D3 C8 S8
+    When my opponent plays the hand S10 H8 D10 C6 H12
+    Then my hand wins
+
+  Scenario: Pair loses to full house
+    Given I play the hand D5 H7 C12 S12 S13
+    When my opponent plays the hand H1 D3 C3 S3 S1
+    Then my hand loses
+
+  Scenario: Full house wins two pairs
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Two pairs loses to full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Full house wins three of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Three of a kind loses to full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight loses to full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Full house wins straight
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Flush loses to full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Full house wins flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Both players have a full house, higher trio wins
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Both players have a full house, lower trio loses
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  # Rule: Four of a kind wins full house, flush, straight, three of a kind, two pairs, pair and high card
+  #   If both players have four of a kind the higher quadrupled card wins
+  #   Ace is counted as 14
+
+  Scenario: High card loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind wins high card
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Pair loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind wins pair
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Two pairs loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind wins two pairs
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Three of a kind loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind wins three of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Four of a kind wins straight
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Straight loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Flush loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind wins flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Four of a kind wins full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Full house loses to four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+
+  Scenario: Both player have four of a kind higher quadrupled card wins
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Both player have four of a kind lower quadrupled card loses
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  # Rule: Straight flush wins four of a kind, full house, flush, straight, three of a kind, two pairs, pair and high card
+  #   If both players have straight flushes, the highest card of the straight is considered.
+  #   Ace is treated as 1 or 14, whichever results in a straight.
+  #   In a 1-5 straight, ace doesn't count as 14 if comparing highest card.
+
+  Scenario: High card loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins high card
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Straight flush wins pair
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Pair loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins two pairs
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Two pairs loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Three of a kind loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins three of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Straight flush wins straight
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Straight loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Flush loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Four of a kind loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins four of a kind
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Full house loses to straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Straight flush wins full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Both players have a straight flush, straight flush with the lower highest card loses
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Both players have a straight flush, straight flush with the higher highest card wins
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Low straight flush with an ace wins full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Full house loses to low straight with an ace
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Low straight flush with ace loses to higher straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: Higher straight flush wins low straight flush with aces
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: High straight flush with an ace wins full house
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Full house loses to high straight flush with an ace
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
+
+  Scenario: High straight flush with an ace wins against lower straight flush
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand wins
+
+  Scenario: Lower straight flush loses to a high straight flush with an ace
+    Given I play the hand
+    When my opponent plays the hand
+    Then my hand loses
