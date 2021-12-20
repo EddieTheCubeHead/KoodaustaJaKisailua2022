@@ -555,8 +555,8 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     Then my hand loses
 
   Scenario: Straight flush wins high card
-    Given I play the hand C10 C1 C11 C12 C13
-    When my opponent plays the hand H1 H10 H11 H12 C9
+    Given I play the hand C10 C9 C11 C12 C13
+    When my opponent plays the hand H1 H10 H11 H12 C8
     Then my hand wins
 
   Scenario: Straight flush wins pair
@@ -570,7 +570,7 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     Then my hand loses
 
   Scenario: Straight flush wins two pairs
-    Given I play the hand D1 D2 D3 D5 D4
+    Given I play the hand D6 D2 D3 D5 D4
     When my opponent plays the hand H9 D9 S10 H3 C3
     Then my hand wins
 
@@ -590,91 +590,91 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     Then my hand wins
 
   Scenario: Straight flush wins straight
-    Given I play the hand H10 H11 H12 H13 H1
+    Given I play the hand H10 H11 H12 H13 H9
     When my opponent plays the hand C3 D4 H2 C5 C6
     Then my hand wins
 
   Scenario: Straight loses to straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H8 D9 C11 C10 C12
+    When my opponent plays the hand H3 H2 H5 H6 H7
     Then my hand loses
 
   Scenario: Straight flush wins flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand S8 S6 S9 S7 S10
+    When my opponent plays the hand S13 S11 S2 S4 S12
     Then my hand wins
 
   Scenario: Flush loses to straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand D7 D13 D12 D5 D2
+    When my opponent plays the hand H5 H6 H7 H9 H8
     Then my hand loses
 
   Scenario: Four of a kind loses to straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand S4 D6 D4 H4 C4
+    When my opponent plays the hand C8 C5 C6 C7 C9
     Then my hand loses
 
   Scenario: Straight flush wins four of a kind
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H9 H10 H12 H11 H13
+    When my opponent plays the hand D1 H7 C7 S7 D7
     Then my hand wins
 
   Scenario: Full house loses to straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H10 D10 S2 D2 C2
+    When my opponent plays the hand D8 D7 D6 D5 D4
     Then my hand loses
 
   Scenario: Straight flush wins full house
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand C13 C1 C12 C11 C10
+    When my opponent plays the hand H1 D1 S1 H12 S12
     Then my hand wins
 
   Scenario: Both players have a straight flush, straight flush with the lower highest card loses
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand C9 C6 C8 C5 C7
+    When my opponent plays the hand H6 H7 H8 H10 H9
     Then my hand loses
 
   Scenario: Both players have a straight flush, straight flush with the higher highest card wins
-    Given I play the hand
-    When my opponent plays the hand
-    Then my hand loses
+    Given I play the hand C12 C11 C9 C8 C10
+    When my opponent plays the hand D4 D7 D8 D6 D5
+    Then my hand wins
 
   Scenario: Low straight flush with an ace wins full house
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand C1 C5 C4 C3 C2
+    When my opponent plays the hand D10 C10 H8 S10 S8
     Then my hand wins
 
   Scenario: Full house loses to low straight with an ace
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H12 C6 D6 S12 D12
+    When my opponent plays the hand H5 H4 H1 H3 H2
     Then my hand loses
 
   Scenario: Low straight flush with ace loses to higher straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H1 H2 H3 H4 H5
+    When my opponent plays the hand C2 C3 C4 C5 C6
     Then my hand loses
 
-  Scenario: Higher straight flush wins low straight flush with aces
-    Given I play the hand
-    When my opponent plays the hand
+  Scenario: Higher straight flush wins low straight flush with ace
+    Given I play the hand D9 D7 D8 D10 D6
+    When my opponent plays the hand D5 D3 D1 D2 D4
     Then my hand wins
 
   Scenario: High straight flush with an ace wins full house
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand S10 S1 S13 S12 S11
+    When my opponent plays the hand H10 C6 D6 S6 C10
     Then my hand wins
 
   Scenario: Full house loses to high straight flush with an ace
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand H2 D2 S7 D7 C7
+    When my opponent plays the hand D11 D12 D13 D1 D10
     Then my hand loses
 
   Scenario: High straight flush with an ace wins against lower straight flush
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand S12 S11 S10 S13 S1
+    When my opponent plays the hand H8 H9 H6 H10 H7
     Then my hand wins
 
   Scenario: Lower straight flush loses to a high straight flush with an ace
-    Given I play the hand
-    When my opponent plays the hand
+    Given I play the hand C10 C7 C9 C11 C8
+    When my opponent plays the hand H11 H1 H10 H13 H12
     Then my hand loses
