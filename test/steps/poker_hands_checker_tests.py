@@ -1,6 +1,6 @@
 from behave import *
 
-from poker_hands_checker import compare_hands
+from src.poker_hands_checker import compare_hands
 
 
 @given("I play the hand {hand}")
