@@ -105,11 +105,6 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     When my opponent plays the hand H13 H2 C6 D5 S2
     Then my hand loses
 
-  Scenario: Equal pairs higher highest remaining card wins
-    Given I play the hand D9 H1 C3 C9 H8
-    When my opponent plays the hand C13 H9 S9 C4 H2
-    Then my hand wins
-
   Scenario: Equal pairs and highest remaining cards, lower second highest remaining card loses
     Given I play the hand H9 C9 S13 H6 C2
     When my opponent plays the hand C13 S9 H8 D2 D9
@@ -270,6 +265,11 @@ Feature: MustacheCorp poker hand checker hand comparison function simple cases
     Given I play the hand H1 D10 C8 H10 S10
     When my opponent plays the hand C12 H10 D9 C11 S13
     Then my hand loses
+
+  Scenario: Straight wins three of a kind
+    Given I play the hand C5 D6 H7 C8 S9
+    When my opponent plays the hand H11 D11 H13 C8 C11
+    Then my hand wins
 
   Scenario: Both players have a straight, straight with the lower highest card loses
     Given I play the hand H9 D10 D11 H8 D7
