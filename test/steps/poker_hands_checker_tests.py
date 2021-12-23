@@ -3,8 +3,6 @@ from behave import *
 from src.poker_hands_checker import compare_hands
 from steps.random_hand_creators import *
 
-_RANDOMIZED_CASE_COUNT = 10000
-
 
 @given("I play the hand {hand}")
 def step_impl(context, hand: str):
@@ -13,42 +11,42 @@ def step_impl(context, hand: str):
 
 @given("I play a pair")
 def step_impl(context):
-    context.first_hands = [create_pair() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_pair() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play two pairs")
 def step_impl(context):
-    context.first_hands = [create_two_pairs() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_two_pairs() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play three of a kind")
 def step_impl(context):
-    context.first_hands = [create_three_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_three_of_a_kind() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play a straight")
 def step_impl(context):
-    context.first_hands = [create_straight() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_straight() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play a flush")
 def step_impl(context):
-    context.first_hands = [create_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_flush() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play a full house")
 def step_impl(context):
-    context.first_hands = [create_full_house() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_full_house() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play four of a kind")
 def step_impl(context):
-    context.first_hands = [create_four_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_four_of_a_kind() for _ in range(context.random_case_repetitions)]
 
 
 @given("I play a straight flush")
 def step_impl(context):
-    context.first_hands = [create_straight_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.first_hands = [create_straight_flush() for _ in range(context.random_case_repetitions)]
         
 
 @when("my opponent plays the hand {hand}")
@@ -58,42 +56,42 @@ def step_impl(context, hand: str):
 
 @when("my opponent plays high card")
 def step_impl(context):
-    context.second_hands = [create_high() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_high() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays a pair")
 def step_impl(context):
-    context.second_hands = [create_pair() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_pair() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays two pairs")
 def step_impl(context):
-    context.second_hands = [create_two_pairs() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_two_pairs() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays three of a kind")
 def step_impl(context):
-    context.second_hands = [create_three_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_three_of_a_kind() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays a straight")
 def step_impl(context):
-    context.second_hands = [create_straight() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_straight() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays a flush")
 def step_impl(context):
-    context.second_hands = [create_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_flush() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays a full house")
 def step_impl(context):
-    context.second_hands = [create_full_house() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_full_house() for _ in range(context.random_case_repetitions)]
 
 
 @when("my opponent plays four of a kind")
 def step_impl(context):
-    context.second_hands = [create_four_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+    context.second_hands = [create_four_of_a_kind() for _ in range(context.random_case_repetitions)]
 
 
 @then("my hand wins")

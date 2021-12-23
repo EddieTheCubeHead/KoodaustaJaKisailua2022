@@ -1,5 +1,5 @@
 # Created by MustacheCorp at 21/12/2021
-Feature: Randomized hand tests
+Feature: MustacheCorp poker hand checker hand comparison function randomized hand tests
   As a middle director
   I want to ensure the engineers don't hard-code solutions
   So I know they do their work properly

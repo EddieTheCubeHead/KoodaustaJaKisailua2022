@@ -310,8 +310,54 @@ Feature: MustacheCorp poker hand checker hand comparison function joker inclusio
     Then my hand loses
 
   Scenario: Straight with two jokers and higher highest card wins straight with lower highest card
+    Given I play the hand H5 D7 J C6 J
+    When my opponent plays the hand C4 D5 H8 C7 S6
+    Then my hand wins
 
-  Scenario:
+  Scenario: Straight with lower highest card loses to straight with two jokers and higher highest card
+    Given I play the hand H9 D8 S10 S11 C12
+    When my opponent plays the hand J C11 J S13 D121
+    Then my hand loses
+
+  Scenario: Straight with two jokers and lower highest card loses to straight with higher highest card
+    Given I play the hand S8 J J D9 H7
+    When my opponent plays the hand D8 H10 C12 S11 S9
+    Then my hand loses
+
+  Scenario: Straight with higher highest card wins straight with two jokers and lower highest card
+    Given I play the hand S8 D7 S4 H6 C5
+    When my opponent plays the hand D3 H5 J C6 J
+    Then my hand wins
+
+  Scenario: High straight with two sequential jokers wins straight with lower highest card
+    Given I play the hand C10 D11 J H12 J
+    When my opponent plays the hand H9 D13 H12 D10 C11
+    Then my hand wins
+
+  Scenario: Straight with lower highest card loses to high straight with two jokers
+    Given I play the hand C10 D11 H9 H13 S12
+    When my opponent plays the hand J S12 D13 H1 J
+    Then my hand loses
+
+  Scenario: Straight with a joker loses to flush
+    Given I play the hand J S9 D10 S7 C6
+    When my opponent plays the hand C5 C10 C2 C7 C13
+    Then my hand loses
+
+  Scenario: Flush wins straight with joker
+    Given I play the hand S9 S3 S4 S8 S12
+    When my opponent plays the hand H9 J H8 D10 C6
+    Then my hand wins
+
+  Scenario: Flush wins straight with two jokers
+    Given I play the hand H9 H13 H11 H7 H6
+    When my opponent plays the hand J H5 C6 J C9
+    Then my hand wins
+
+  Scenario: Straight with two jokers loses to flush
+    Given I play the hand H8 H10 J C11 J
+    When my opponent plays the hand D5 D4 D12 D9 D6
+    Then my hand loses
 
   Scenario:
 
