@@ -8,14 +8,14 @@ def create_high() -> list[str]:
     numbers.pop(random.randint(1, 2))
     numbers.pop(random.randint(3, 4))
     suites = _create_suites()
-    return [f"{suite}{number}" for suite, number in zip(suites, numbers)]
+    return _create_hand(numbers, suites)
 
 
 def create_pair() -> list[str]:
     numbers = _create_distinct_values(4)
     numbers.append(random.choice(numbers))
     suites = _create_suites()
-    return [f"{suite}{number}" for suite, number in zip(suites, numbers)]
+    return _create_hand(numbers, suites)
 
 
 def create_two_pairs() -> list[str]:
@@ -23,7 +23,7 @@ def create_two_pairs() -> list[str]:
     numbers += numbers
     numbers.remove(random.choice(numbers))
     suites = _create_suites()
-    return [f"{suite}{number}" for suite, number in zip(suites, numbers)]
+    return _create_hand(numbers, suites)
 
 
 def create_three_of_a_kind() -> list[str]:
@@ -32,7 +32,43 @@ def create_three_of_a_kind() -> list[str]:
     numbers.append(random_number)
     numbers.append(random_number)
     suites = _create_suites()
-    return [f"{suite}{number}" for suite, number in zip(suites, numbers)]
+    return _create_hand(numbers, suites)
+
+
+def create_straight() -> list[str]:
+    start = random.randint(1, 10)
+    numbers = [max(number % 14, 1) for number in range(start, start + 5)]
+    suites = _create_suites()
+    return _create_hand(numbers, suites)
+
+
+def create_flush() -> list[str]:
+    numbers = sorted(_create_distinct_values(7))
+    numbers.pop(random.randint(1, 2))
+    numbers.pop(random.randint(3, 4))
+    suites = _create_suites(flush=True)
+    return _create_hand(numbers, suites)
+
+
+def create_full_house() -> list[str]:
+    numbers = _create_distinct_values(2) * 3
+    numbers.remove(random.choice(numbers))
+    suites = _create_suites()
+    return _create_hand(numbers, suites)
+
+
+def create_four_of_a_kind() -> list[str]:
+    numbers = _create_distinct_values(2)
+    numbers += [numbers[1]] * 3
+    suites = _create_suites()
+    return _create_hand(numbers, suites)
+
+
+def create_straight_flush() -> list[str]:
+    start = random.randint(1, 10)
+    numbers = [max(number % 14, 1) for number in range(start, start + 5)]
+    suites = _create_suites(flush=True)
+    return _create_hand(numbers, suites)
 
 
 def _create_distinct_values(amount: int) -> list[int]:
@@ -54,3 +90,7 @@ def _create_suites(*, flush: bool = False) -> list[str]:
         for suite in range(index, index + 4):
             suites.append(possible[suite % 4])
         return suites
+
+
+def _create_hand(numbers, suites):
+    return [f"{suite}{number}" for suite, number in zip(suites, numbers)]

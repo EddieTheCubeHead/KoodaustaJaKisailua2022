@@ -24,6 +24,31 @@ def step_impl(context):
 @given("I play three of a kind")
 def step_impl(context):
     context.first_hands = [create_three_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@given("I play a straight")
+def step_impl(context):
+    context.first_hands = [create_straight() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@given("I play a flush")
+def step_impl(context):
+    context.first_hands = [create_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@given("I play a full house")
+def step_impl(context):
+    context.first_hands = [create_full_house() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@given("I play four of a kind")
+def step_impl(context):
+    context.first_hands = [create_four_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@given("I play a straight flush")
+def step_impl(context):
+    context.first_hands = [create_straight_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
         
 
 @when("my opponent plays the hand {hand}")
@@ -44,6 +69,31 @@ def step_impl(context):
 @when("my opponent plays two pairs")
 def step_impl(context):
     context.second_hands = [create_two_pairs() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@when("my opponent plays three of a kind")
+def step_impl(context):
+    context.second_hands = [create_three_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@when("my opponent plays a straight")
+def step_impl(context):
+    context.second_hands = [create_straight() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@when("my opponent plays a flush")
+def step_impl(context):
+    context.second_hands = [create_flush() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@when("my opponent plays a full house")
+def step_impl(context):
+    context.second_hands = [create_full_house() for _ in range(_RANDOMIZED_CASE_COUNT)]
+
+
+@when("my opponent plays four of a kind")
+def step_impl(context):
+    context.second_hands = [create_four_of_a_kind() for _ in range(_RANDOMIZED_CASE_COUNT)]
 
 
 @then("my hand wins")
