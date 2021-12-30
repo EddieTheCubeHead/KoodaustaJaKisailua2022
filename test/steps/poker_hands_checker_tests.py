@@ -119,6 +119,7 @@ def step_impl(context):
 def step_impl(context):
     for first_hand, second_hand in zip(context.first_hands, context.second_hands):
         assert_expected_result(first_hand, second_hand, 0)
+        assert_expected_result(second_hand, first_hand, 0)
 
 
 def _parse_hand(hand: str) -> list[str]:

@@ -91,7 +91,7 @@ def create_flush(context: Context) -> list[str]:
 
 def _create_joker_flush(joker_amount: int) -> list[str]:
     numbers = sorted(_create_distinct_values(6))
-    numbers.pop(random.randint(2, 5))
+    numbers.pop(random.randint(2, 4))
     suites = _create_suites(flush=True)
     for _ in range(joker_amount):
         numbers.pop(2)
