@@ -23,6 +23,5 @@ jobs:
         pip install behave
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run behave tests
-      working-directory: ./test
       run: |
         behave -D repetitions=100
