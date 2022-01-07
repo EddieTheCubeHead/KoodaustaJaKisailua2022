@@ -1,7 +1,7 @@
 from behave import *
 
 from src.poker_hands_checker import compare_hands
-from steps.random_hand_creators import *
+from features.steps.random_hand_creators import *
 
 
 @given("neither player has jokers in hand")
