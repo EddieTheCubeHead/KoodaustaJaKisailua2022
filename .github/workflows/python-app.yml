@@ -25,3 +25,8 @@ jobs:
     - name: Run behave tests
       run: |
         behave -D repetitions=100 --junit
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: reports/*.xml
