@@ -1,3 +1,5 @@
+from typing import List
+
 from behave import *
 
 from src.poker_hands_checker import compare_hands
@@ -122,7 +124,7 @@ def step_impl(context):
         assert_expected_result(second_hand, first_hand, 0)
 
 
-def _parse_hand(hand: str) -> list[str]:
+def _parse_hand(hand: str) -> List[str]:
     return list(hand.split(" "))
 
 
