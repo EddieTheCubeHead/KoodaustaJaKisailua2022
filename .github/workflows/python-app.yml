@@ -42,7 +42,7 @@ jobs:
       if: always()
       with:
         webhook: ${{ secrets.WEBHOOK_URL }}
-        title: "test run"
+        title: "master repository"
         description: "✅ Passed: ${{steps.create_report.outputs.passed}}\n⛔ Failed: ${{steps.create_report.outputs.failed}}\n⌛ Skipped: ${{steps.create_report.outputs.skipped}}\n⏱ Running time: ${{steps.create_report.outputs.time}}"
         color: ${{ (startsWith(job.status, 'success') && 0x07cf00 ) || 0xcf0000 }}
         username: GitHub Actions
