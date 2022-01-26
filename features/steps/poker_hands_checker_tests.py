@@ -130,7 +130,7 @@ def _parse_hand(hand: str) -> List[str]:
 
 def assert_expected_result(first_hand, second_hand, expected):
     try:
-        result: int = compare_hands(first_hand, second_hand)
+        result = compare_hands(first_hand, second_hand)
     except Exception as exception:
         print(f"An exception occurred while comparing hands {first_hand} and {second_hand}")
         raise exception
